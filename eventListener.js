@@ -15,9 +15,6 @@ const providerEth = new JsonRpcProvider(
   "https://eth-sepolia.g.alchemy.com/v2/HugBgBUi34bleuAuHHP7WRE2cOkuTtoc"
 );
 
-const privateKey =
-  "2d1f1100effef7adcf2d875fd74e074bfae098cfb45bcf58a5453b78d206afaf";
-
 const TokenMaticAddress = "0x627098Fcc59D1ac36899f12Acf0c5A9AAcBEd01b";
 
 const TokenEthAddress = "0x4e146e4a1B93035fde484db0E4F65563846Da3D9";
@@ -96,7 +93,10 @@ const events = async () => {
   });
 
   async function sendTokenEth(wallet, amount) {
-    const walletWithProvider = new ethers.Wallet(privateKey, providerEth);
+    const walletWithProvider = new ethers.Wallet(
+      process.env.privateKey,
+      providerEth
+    );
 
     const tokenSmartContract = new ethers.Contract(
       TokenEthAddress,
@@ -110,7 +110,10 @@ const events = async () => {
   }
 
   async function sendTokenMatic(wallet, amount) {
-    const walletWithProvider = new ethers.Wallet(privateKey, providerMatic);
+    const walletWithProvider = new ethers.Wallet(
+      process.env.privateKey,
+      providerMatic
+    );
 
     const tokenSmartContract = new ethers.Contract(
       TokenMaticAddress,
