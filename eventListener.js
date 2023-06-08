@@ -35,34 +35,34 @@ const contractBridgeMatic = new ethers.Contract(
   providerMatic
 );
 
-const eventsETH = async () => {
-  contractBridgeEth.on("BRIDGE", async (from, amount) => {
-    // console.log("Event received - From:", from);
-    // console.log("Amount:", amount.toString());
-    // console.log("Chain Name:", chainName.toString());
-    sendTokenToWallet(from, amount)
-      .then(() => {
-        console.log("Tokens sent successfully");
-      })
-      .catch((error) => {
-        console.error("Error sending tokens:", error);
-      });
-  });
+// const eventsETH = async () => {
+//   contractBridgeEth.on("BRIDGE", async (from, amount) => {
+//     // console.log("Event received - From:", from);
+//     // console.log("Amount:", amount.toString());
+//     // console.log("Chain Name:", chainName.toString());
+//     sendTokenToWallet(from, amount)
+//       .then(() => {
+//         console.log("Tokens sent successfully");
+//       })
+//       .catch((error) => {
+//         console.error("Error sending tokens:", error);
+//       });
+//   });
 
-  async function sendTokenToWallet(wallet, amount) {
-    const walletWithProvider = new ethers.Wallet(privateKey, providerMatic);
+//   async function sendTokenToWallet(wallet, amount) {
+//     const walletWithProvider = new ethers.Wallet(privateKey, providerMatic);
 
-    const tokenSmartContract = new ethers.Contract(
-      TokenMaticAddress,
-      Token,
-      walletWithProvider
-    );
+//     const tokenSmartContract = new ethers.Contract(
+//       TokenMaticAddress,
+//       Token,
+//       walletWithProvider
+//     );
 
-    const transaction = await tokenSmartContract.transfer(wallet, amount);
-    await transaction.wait();
-    console.log("Tokens transferred successfully.");
-  }
-};
+//     const transaction = await tokenSmartContract.transfer(wallet, amount);
+//     await transaction.wait();
+//     console.log("Tokens transferred successfully.");
+//   }
+// };
 
 const events = async () => {
   contractBridgeMatic.on("BRIDGE", async (from, amount) => {
